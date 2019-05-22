@@ -34,7 +34,7 @@ void ATankPlayerController::AimTowardsCrossHair()
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *HitLocation.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *HitLocation.ToString());
 	}
 	// if hits the landscape
 		// tell the controlled tank to aim at this point
@@ -50,37 +50,36 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 	FVector LookDirection;
 	if (GetLookDirection(Screenlocation, LookDirection))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("LookDirection: %s"), *LookDirection.ToString());
-		return true;
+		GetLookVectorHitLocation(LookDirection, HitLocation);
 	}
-	return false;
-
-// 	FVector PlayersViewPointLocation;
-// 	FRotator PlayersViewPointRotation;
-// 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(PlayersViewPointLocation, PlayersViewPointRotation);
-// 
-// 	// Calculate how far we can reach into the distance and draw a debug line to visualize this
-// 	FVector LineTraceEnd = PlayersViewPointLocation + PlayersViewPointRotation.Vector() * 10000.f;
-// 
-// 	// Ray-cast out to specified distance
-// 	FHitResult Hit;
-// 	FCollisionQueryParams QueryParams = FCollisionQueryParams(FName(TEXT("")), false, GetOwner());
-// 	if (GetWorld()->LineTraceSingleByObjectType(
-// 			Hit,
-// 			PlayersViewPointLocation,
-// 			LineTraceEnd,
-// 			FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
-// 			QueryParams))
-// 	{
-// 
-// 		HitLocation = Hit.Location;
-// 		return true;
-// 	}
+	return true;
 }
 
+// De-Project the screen position of the cross hair to a world direction
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
 {
 	FVector WorldLocation; // to be discarded, isn't needed for our purpose
 
 	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation, LookDirection);
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const
+{
+	// Ray-cast out to specified distance
+	FVector StartLocation = PlayerCameraManager->GetCameraLocation();
+	FVector EndLocation = StartLocation + LookDirection * LineTraceRange;
+	FHitResult Hit;
+	FCollisionQueryParams QueryParams = FCollisionQueryParams(FName(TEXT("")), false, GetOwner());
+	
+	 if (GetWorld()->LineTraceSingleByChannel(
+		 Hit,
+		 StartLocation,
+		 EndLocation,
+		 ECollisionChannel::ECC_Visibility,
+		 QueryParams))
+			{
+				HitLocation = Hit.Location;
+				return true;
+			}
+	 return false;
 }
