@@ -27,20 +27,22 @@ ATank* ATankPlayerController::GetControlledTank() const
 	return Cast<ATank>(GetPawn());
 }
 
+// Move the turret towards the cross hair
 void ATankPlayerController::AimTowardsCrossHair()
 {
 	if (!GetControlledTank()) return;
 	
-	FVector HitLocation;
+	FVector HitLocation;	// Out parameter to store the location when we hit something with the line trace
+
+	// if we hit something
 	if (GetSightRayHitLocation(HitLocation))
 	{
+		// tell the controlled tank to aim at this point
 		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *HitLocation.ToString());
 	}
-	// if hits the landscape
-		// tell the controlled tank to aim at this point
 }
 
-// Get world location if line trace through cross hair
+// Get world location of the line trace through cross hair
 bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 {
 	int32 ViewportSizeX, ViewportSizeY;
@@ -63,14 +65,15 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& 
 	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation, LookDirection);
 }
 
+// Get the HitLocation of out HitResult
 bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const
 {
-	// Ray-cast out to specified distance
+	FHitResult Hit;
 	FVector StartLocation = PlayerCameraManager->GetCameraLocation();
 	FVector EndLocation = StartLocation + LookDirection * LineTraceRange;
-	FHitResult Hit;
 	FCollisionQueryParams QueryParams = FCollisionQueryParams(FName(TEXT("")), false, GetOwner());
 	
+	// Ray-cast out to specified distance
 	 if (GetWorld()->LineTraceSingleByChannel(
 		 Hit,
 		 StartLocation,
