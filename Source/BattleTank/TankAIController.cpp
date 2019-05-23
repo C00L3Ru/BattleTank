@@ -9,7 +9,7 @@ void ATankAIController::BeginPlay()
 
 	if (!GetAiControlledTank())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("No ControlledTank"));
+		UE_LOG(LogTemp, Warning, TEXT("No AiControlledTank"));
 		return;
 	}
 	UE_LOG(LogTemp, Warning, TEXT("AiPlayerControllers Tank is %s "), *GetAiControlledTank()->GetName());
@@ -21,6 +21,12 @@ void ATankAIController::BeginPlay()
 	}
 	UE_LOG(LogTemp, Warning, TEXT("AiPlayerControllers Tank is %s "), *GetPlayerTank()->GetName());
 
+}
+
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	GetAiControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
 }
 
 ATank* ATankAIController::GetAiControlledTank() const
