@@ -73,12 +73,13 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 	FCollisionQueryParams QueryParams = FCollisionQueryParams(FName(TEXT("")), false, GetOwner());
 	
 	// Ray-cast out to specified distance
-	 if (GetWorld()->LineTraceSingleByChannel(
-		 Hit,
+	 if (GetWorld()->LineTraceSingleByChannel
+		 (Hit,
 		 StartLocation,
 		 EndLocation,
 		 ECollisionChannel::ECC_Visibility,
-		 QueryParams))
+		 QueryParams)
+		 )
 			{
 				HitLocation = Hit.Location;
 				return true;
