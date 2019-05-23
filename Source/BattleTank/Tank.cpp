@@ -15,6 +15,10 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
+	if (!Tank)
+	{
+		return;
+	}
 	
 }
 
@@ -30,5 +34,13 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void ATank::AimAt(FVector HitLocation)
+{
+	//FString TankName = Tank->GetOwner()->GetName();
+	// tell the controlled tank to aim at this point
+	//UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s"))
+	UE_LOG(LogTemp, Warning, TEXT("Help"), *HitLocation.ToString())
 }
 

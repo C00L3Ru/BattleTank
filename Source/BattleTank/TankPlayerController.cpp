@@ -30,15 +30,14 @@ ATank* ATankPlayerController::GetControlledTank() const
 // Move the turret towards the cross hair
 void ATankPlayerController::AimTowardsCrossHair()
 {
-	if (!GetControlledTank()) return;
+	if (!GetControlledTank()) { return; }
 	
 	FVector HitLocation;	// Out parameter to store the location when we hit something with the line trace
 
 	// if we hit something
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		// tell the controlled tank to aim at this point
-		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *HitLocation.ToString());
+		GetControlledTank()->AimAt(HitLocation);
 	}
 }
 
