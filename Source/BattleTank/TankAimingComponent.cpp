@@ -46,6 +46,12 @@ void UTankAimingComponent::AImAt(FVector HitLocation, float LaunchSpeed)
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	 // Workout difference between current barrel rotation and AimDirection
+	FRotator CurrentBarrelRotation = GetOwner()->GetActorForwardVector().Rotation();
+	FRotator AimAsRotator = AimDirection.Rotation();
+
 	// Move barrel the right amount this frame
+	FRotator DeltaBarrelRotator = AimAsRotator - CurrentBarrelRotation;
+	UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *DeltaBarrelRotator.ToString());
+
 	// Given the max elevation speed, and the frame time
 }
