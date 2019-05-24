@@ -21,9 +21,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
-	virtual void Tick(float DeltaTime) override;
 	void AimAt(FVector HitLocation);
-
 
 protected:
 	// Called when the game starts or when spawned
@@ -37,5 +35,4 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 10000;
-
 };
