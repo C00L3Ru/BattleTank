@@ -17,11 +17,9 @@ protected:
 	void BeginPlay() override;
 
 public:
-	void Tick(float DeltaTime)override;
+	virtual void Tick(float DeltaTime)override;
 
 private:
-	ATank* GetAiControlledTank() const;
-	ATank* GetPlayerTank() const;
-
+	
 	
 };
