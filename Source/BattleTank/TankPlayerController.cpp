@@ -53,8 +53,9 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 	if (GetLookDirection(Screenlocation, LookDirection))
 	{
 		GetLookVectorHitLocation(LookDirection, HitLocation);
+		return true;
 	}
-	return true;
+	return false;
 }
 
 // De-Project the screen position of the cross hair to a world direction
