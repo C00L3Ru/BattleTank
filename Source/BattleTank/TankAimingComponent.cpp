@@ -27,10 +27,13 @@ void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
 
 void UTankAimingComponent::AImAt(FVector HitLocation, float LaunchSpeed)
 {
-	if (!Barrel) { return; }
+	FString OurTankName = GetOwner()->GetName();
+	if (!Barrel) 
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s has no barrel"), *OurTankName);
+		return; }
 	if (!Turret) { return; }
 
-	FString OurTankName = GetOwner()->GetName();
 	FVector LaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 	
@@ -49,7 +52,7 @@ void UTankAimingComponent::AImAt(FVector HitLocation, float LaunchSpeed)
 	{
 		FVector AimDirection = LaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);	
-		UE_LOG(LogTemp, Warning, TEXT("%s Aiming at: %s "), *OurTankName, *AimDirection.ToString())
+		//UE_LOG(LogTemp, Warning, TEXT("%s Aiming at: %s "), *OurTankName, *AimDirection.ToString())
 	}
 	else
 	{
