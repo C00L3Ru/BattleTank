@@ -13,7 +13,6 @@ ATank::ATank()
 
 	// Attach our aiming component in constructor at runtime
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
-	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("TankMovementComponent"));
 }
 
 // Called when the game starts or when spawned

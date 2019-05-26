@@ -20,6 +20,6 @@ public:
 
 private:
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
-	float TankTrackMaxDrivingForce = 100000.0f;
+	float TankTrackMaxDrivingForce = 3000000.0f;
 	
 };
