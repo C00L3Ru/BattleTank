@@ -29,7 +29,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();
 
-
 	void AimAt(FVector HitLocation);
 
 protected:
@@ -45,8 +44,12 @@ private:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
+	UTankBarrel* Barrel = nullptr;
+	UTankTurret* Turret = nullptr;
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UTankBarrel* Barrel = nullptr;
+	float ReloadTime = 3.0f;
+	double LastFireTime = 0.f;
 };
