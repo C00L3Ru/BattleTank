@@ -22,8 +22,7 @@ public:
 	void Tick(float DeltaTime)override;
 
 private:
-	ATank* PlayerTank = nullptr;
-	ATank* AiControlledTank = nullptr;
+
 
 
 };

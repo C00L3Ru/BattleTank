@@ -8,8 +8,6 @@ void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	AiControlledTank = Cast<ATank>(GetPawn());
 
 }
 
@@ -17,14 +15,19 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	//AiControlledTank->AimAt(PlayerTank->GetActorLocation());
+	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	auto AiControlledTank = Cast<ATank>(GetPawn());
 
- 	if (PlayerTank)
+ 	if (ensure(PlayerTank))
  	{
 		UE_LOG(LogTemp, Warning, TEXT("PlayerTank found position is at %s"), *PlayerTank->GetActorLocation().ToString());
  		AiControlledTank->AimAt(PlayerTank->GetActorLocation());
  		AiControlledTank->Fire();
  	}
- 	UE_LOG(LogTemp, Warning, TEXT("No PlayerTank"));
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No PlayerTank"));
+	}
 }
 
 
