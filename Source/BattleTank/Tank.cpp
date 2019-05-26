@@ -3,6 +3,7 @@
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
+#include "TankMovementComponent.h"
 
 // Sets default values
 ATank::ATank()
@@ -12,6 +13,7 @@ ATank::ATank()
 
 	// Attach our aiming component in constructor at runtime
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
+	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("TankMovementComponent"));
 }
 
 // Called when the game starts or when spawned
@@ -48,8 +50,6 @@ void ATank::Fire()
 	
 	if ( isReloaded)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Fire Pressed"));
-
 		FVector BarrelLocation = Barrel->GetSocketLocation(FName("Projectile"));
 		FRotator BarrelRotation = Barrel->GetSocketRotation(FName("Projectile"));
 

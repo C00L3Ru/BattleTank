@@ -20,7 +20,6 @@ void ATankAIController::Tick(float DeltaTime)
 
  	if (ensure(PlayerTank))
  	{
-		UE_LOG(LogTemp, Warning, TEXT("PlayerTank found position is at %s"), *PlayerTank->GetActorLocation().ToString());
  		AiControlledTank->AimAt(PlayerTank->GetActorLocation());
  		AiControlledTank->Fire();
  	}
