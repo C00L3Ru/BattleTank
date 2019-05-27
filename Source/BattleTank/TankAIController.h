@@ -22,7 +22,8 @@ public:
 	void Tick(float DeltaTime)override;
 
 private:
-
+	UPROPERTY(EditAnywhere, Category = AiNavigation)
+	float AcceptanceRadius = 3000.0f;
 
 
 };
