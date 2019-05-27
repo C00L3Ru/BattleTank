@@ -25,6 +25,6 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 void UTankMovementComponent::IntendMoveRight(float Throw)
 {
 	UE_LOG(LogTemp, Warning, TEXT("turning right %f"), Throw);
-	LeftTrack->SetThrottle(Throw);
-	RightTrack->SetThrottle(-Throw);
+	LeftTrack->SetThrottle(-Throw);
+	RightTrack->SetThrottle(Throw);
 }
