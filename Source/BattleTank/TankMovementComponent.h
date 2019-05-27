@@ -8,6 +8,7 @@
 
 class ATank;
 class UTankTrack;
+
 /**
  * 
  */
@@ -22,13 +23,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Movement)
 	void Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
-	
+
 private:
 	UTankTrack* LeftTrack = nullptr;
 	UTankTrack* RightTrack = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
-	float TankTrackMaxDrivingForce = 3000000.0f;
-
 
 };
