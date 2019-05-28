@@ -23,7 +23,7 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere, Category = AiNavigation)
-	float AcceptanceRadius = 3000.0f;
+	float AcceptanceRadius = 900.0f;
 
 
 };
