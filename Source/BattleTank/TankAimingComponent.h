@@ -28,14 +28,14 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = Firing)
-	EFiringStatus FiringStatus;
+	EFiringStatus FiringStatus = EFiringStatus::Aiming;
 
 public:	
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void Initialise(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet);
+
 	void AImAt(FVector HitLocation, float LaunchSpeed);
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-	void SetTurretReference(UTankTurret* TurretToSet);
-
-
+	
 private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
