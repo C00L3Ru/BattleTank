@@ -11,7 +11,7 @@ UTankAimingComponent::UTankAimingComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
+	FiringStatus = EFiringStatus::Aiming;
 	// ...
 }
 
@@ -55,7 +55,7 @@ void UTankAimingComponent::AImAt(FVector HitLocation, float LaunchSpeed)
 	if (bHaveAimSolution)
 	{
 		FVector AimDirection = LaunchVelocity.GetSafeNormal();
-		MoveBarrelTowards(AimDirection);	
+		MoveBarrelTowards(AimDirection);
 	}
 	else
 	{
