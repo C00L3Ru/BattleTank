@@ -10,7 +10,7 @@
  * Responsible for helping the Tank aim.
  */
 
-class ATank;
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
@@ -23,13 +23,12 @@ public:
 protected:
 	void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	ATank* GetControlledTank() const;
-
 	UFUNCTION(BlueprintImplementableEvent, Category = Setup)
 	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
 private:
+	UTankAimingComponent* TankAimingComponent = nullptr;
+
 	void AimTowardsCrossHair();
 	bool GetSightRayHitLocation(FVector& Hitlocation) const;
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;

@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "Tank.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "TankAIController.generated.h"
@@ -10,6 +9,9 @@
 /**
  *
  */
+
+class UTankAimingComponent;
+
 UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
 {
@@ -22,6 +24,8 @@ public:
 	void Tick(float DeltaTime)override;
 
 private:
+	UTankAimingComponent* TankAimingComponent = nullptr;
+	
 	UPROPERTY(EditAnywhere, Category = AiNavigation)
 	float AcceptanceRadius = 900.0f;
 

@@ -27,8 +27,6 @@ public:
 	void AimAt(FVector HitLocation);
 
 protected:
-	UPROPERTY(BlueprintReadOnly, Category = Setup)
-	UTankAimingComponent* TankAimingComponent = nullptr;
 
 private:
 	// TODO remove once firing is moved to aiming component

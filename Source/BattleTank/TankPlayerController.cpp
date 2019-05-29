@@ -2,13 +2,12 @@
 
 #include "TankPlayerController.h"
 #include "Engine/World.h"
-#include "Tank.h"
 #include "TankAimingComponent.h"
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	auto TankAimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	TankAimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(TankAimingComponent)) { return; }
 	FoundAimingComponent(TankAimingComponent);
 }
@@ -19,23 +18,18 @@ void ATankPlayerController::Tick(float DeltaTime)
 	AimTowardsCrossHair();
 }
 
-//	Get the pawn and put it in the Tank(Cast)
-ATank* ATankPlayerController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
 // Move the turret towards the cross hair
 void ATankPlayerController::AimTowardsCrossHair()
 {
-	if (!ensure(GetControlledTank())) { return; }
+	TankAimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(TankAimingComponent)) { return; }
 	
 	FVector HitLocation;	// Out parameter to store the location when we hit something with the line trace
 
 	// if we hit something
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		GetControlledTank()->AimAt(HitLocation);
+		TankAimingComponent->AimAt(HitLocation);
 	}
 }
 
