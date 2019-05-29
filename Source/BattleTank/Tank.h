@@ -9,7 +9,6 @@
 class UTankBarrel;
 class UTankAimingComponent;
 class AProjectile;
-class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -20,6 +19,8 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
+	void BeginPlay() override;
+
 	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();
 
@@ -29,10 +30,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = Setup)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, Category = Setup)
-	UTankMovementComponent* TankMovementComponent = nullptr;
-
 private:
+	// TODO remove once firing is moved to aiming component
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 10000;
 
