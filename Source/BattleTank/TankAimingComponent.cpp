@@ -23,6 +23,21 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
+void UTankAimingComponent::BeginPlay()
+{
+	Super::BeginPlay();
+	LastFireTime = FPlatformTime::Seconds();
+}
+
+void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	if ((FPlatformTime::Seconds() - LastFireTime) > ReloadTime)
+	{
+		FiringStatus = EFiringStatus::Reloading;
+	}
+}
+
 void UTankAimingComponent::Initialise(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet)
 {
 	Turret = TurretToSet;
@@ -63,9 +78,8 @@ void UTankAimingComponent::Fire()
 	if (!ensure(Barrel) || !ensure(ProjectileBlueprint)) { return; }
 
 
-	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTime;
 
-	if (isReloaded)
+	if (FiringStatus != EFiringStatus::Reloading)
 	{
 		FVector BarrelLocation = Barrel->GetSocketLocation(FName("Projectile"));
 		FRotator BarrelRotation = Barrel->GetSocketRotation(FName("Projectile"));

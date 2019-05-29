@@ -28,6 +28,8 @@ public:
 	UTankAimingComponent();
 
 protected:
+	void BeginPlay() override;
+
 	UPROPERTY(BlueprintReadOnly, Category = Firing)
 	EFiringStatus FiringStatus = EFiringStatus::Reloading;
 
@@ -41,6 +43,7 @@ public:
 	void Fire();
 	
 private:
+	void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	void MoveBarrelTowards(FVector AimDirection);
 
 	UTankBarrel* Barrel = nullptr;
