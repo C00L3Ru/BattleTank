@@ -9,7 +9,7 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	auto TankAimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
-	if (TankAimingComponent)
+	if (ensure(TankAimingComponent))
 	{
 		FoundAimingComponent(TankAimingComponent);
 	}
@@ -35,7 +35,7 @@ ATank* ATankPlayerController::GetControlledTank() const
 // Move the turret towards the cross hair
 void ATankPlayerController::AimTowardsCrossHair()
 {
-	if (!GetControlledTank()) { return; }
+	if (!ensure(GetControlledTank())) { return; }
 	
 	FVector HitLocation;	// Out parameter to store the location when we hit something with the line trace
 
