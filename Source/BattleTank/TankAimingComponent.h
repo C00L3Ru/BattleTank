@@ -59,4 +59,6 @@ private:
 	float LaunchSpeed = 10000;
 
 	double LastFireTime = 0.f;
+	FVector AimiDirection;
+	bool bIsAimed;
 };
