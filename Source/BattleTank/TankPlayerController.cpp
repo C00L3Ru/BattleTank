@@ -21,6 +21,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 // Move the turret towards the cross hair
 void ATankPlayerController::AimTowardsCrossHair()
 {
+	if(!GetPawn()) { return; }
 	TankAimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(TankAimingComponent)) { return; }
 	
