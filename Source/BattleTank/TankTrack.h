@@ -15,11 +15,12 @@ class BATTLETANK_API UTankTrack : public UStaticMeshComponent
 	GENERATED_BODY()
 
 public:
+	UTankTrack();
+	void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetThrottle(float Throttle);
 
 private:
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
-	float TankTrackMaxDrivingForce = 100000.0f;
-	
+	float TankTrackMaxDrivingForce = 40000000.0f;
 };
