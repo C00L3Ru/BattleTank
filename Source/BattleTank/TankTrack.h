@@ -20,7 +20,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetThrottle(float Throttle);
 
+protected:
+	void BeginPlay() override;
+
 private:
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	float TankTrackMaxDrivingForce = 40000000.0f;
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 };
