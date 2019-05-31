@@ -26,7 +26,7 @@ public:
 private:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 	
-	UPROPERTY(EditAnywhere, Category = AiNavigation)
+	UPROPERTY(EditAnywhere, Category = Setup)
 	float AcceptanceRadius = 900.0f;
 
 

@@ -26,7 +26,7 @@ void ATankPlayerController::AimTowardsCrossHair()
 	
 	FVector HitLocation;	// Out parameter to store the location when we hit something with the line trace
 	bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
-	UE_LOG(LogTemp, Warning, TEXT("HitLocation Result = %i"), bGotHitLocation);
+
 	// if we hit something
 	if (bGotHitLocation)
 	{
