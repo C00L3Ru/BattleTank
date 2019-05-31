@@ -25,9 +25,10 @@ void ATankPlayerController::AimTowardsCrossHair()
 	if (!ensure(TankAimingComponent)) { return; }
 	
 	FVector HitLocation;	// Out parameter to store the location when we hit something with the line trace
-
+	bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
+	UE_LOG(LogTemp, Warning, TEXT("HitLocation Result = %i"), bGotHitLocation);
 	// if we hit something
-	if (GetSightRayHitLocation(HitLocation))
+	if (bGotHitLocation)
 	{
 		TankAimingComponent->AimAt(HitLocation);
 	}
@@ -43,18 +44,11 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 	FVector LookDirection;
 	if (GetLookDirection(Screenlocation, LookDirection))
 	{
-		GetLookVectorHitLocation(LookDirection, HitLocation);
-		return true;
+		return GetLookVectorHitLocation(LookDirection, HitLocation);
+		
 	}
+
 	return false;
-}
-
-// De-Project the screen position of the cross hair to a world direction
-bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
-{
-	FVector WorldLocation; // to be discarded, isn't needed for our purpose
-
-	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation, LookDirection);
 }
 
 // Get the HitLocation of out HitResult
@@ -62,7 +56,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 {
 	FHitResult Hit;
 	FVector StartLocation = PlayerCameraManager->GetCameraLocation();
-	FVector EndLocation = StartLocation + LookDirection * LineTraceRange;
+	FVector EndLocation = StartLocation + (LookDirection * LineTraceRange);
 	FCollisionQueryParams QueryParams = FCollisionQueryParams(FName(TEXT("")), false, GetOwner());
 	
 	// Ray-cast out to specified distance
@@ -77,5 +71,14 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 				HitLocation = Hit.Location;
 				return true;
 			}
+	 HitLocation = FVector(0.0f);
 	 return false;
+}
+
+// De-Project the screen position of the cross hair to a world direction
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
+{
+	FVector WorldLocation; // to be discarded, isn't needed for our purpose
+
+	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation, LookDirection);
 }

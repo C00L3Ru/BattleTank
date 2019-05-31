@@ -49,5 +49,4 @@ void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UP
 	DriveTrack();
 	ApplySideWaysForce();
 	CurrentThrottle = 0;
-	UE_LOG(LogTemp, Warning, TEXT("Tack hitting ground"));
 }
