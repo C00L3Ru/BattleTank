@@ -27,7 +27,7 @@ private:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 	
 	UPROPERTY(EditAnywhere, Category = Setup)
-	float AcceptanceRadius = 8000.0f;
+	float AcceptanceRadius = 800.0f;
 
 
 };
