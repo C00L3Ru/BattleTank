@@ -25,7 +25,19 @@
 		},
 		{
 			"Name": "HoudiniEngine",
-			"Enabled": false
+			"Enabled": true
+		},
+		{
+			"Name": "Niagara",
+			"Enabled": true
+		},
+		{
+			"Name": "NiagaraExtras",
+			"Enabled": true
+		},
+		{
+			"Name": "HoudiniNiagara",
+			"Enabled": true
 		}
 	]
 }

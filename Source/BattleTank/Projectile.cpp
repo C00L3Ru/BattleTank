@@ -3,6 +3,9 @@
 
 #include "Projectile.h"
 #include <GameFramework/ProjectileMovementComponent.h>
+#include <../Plugins/FX/Niagara/Source/Niagara/Public/NiagaraComponent.h>
+
+
 
 
 // Sets default values
@@ -11,6 +14,14 @@ AProjectile::AProjectile()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("ProjectileMovementComponent"));
+
+	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("CollisionMesh"));
+	SetRootComponent(CollisionMesh);
+	CollisionMesh->SetNotifyRigidBodyCollision(true);
+
+	LaunchBlast = CreateDefaultSubobject<UNiagaraComponent>(FName("LaunchBlast"));
+	LaunchBlast->bIsActive;
+
 	ProjectileMovementComponent->bAutoActivate = false;
 }
 
