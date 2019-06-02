@@ -3,7 +3,7 @@
 
 #include "Projectile.h"
 #include <GameFramework/ProjectileMovementComponent.h>
-#include <../Plugins/FX/Niagara/Source/Niagara/Public/NiagaraComponent.h>
+//#include <../Plugins/FX/Niagara/Source/Niagara/Public/NiagaraComponent.h>
 
 
 // Sets default values
@@ -16,8 +16,8 @@ AProjectile::AProjectile()
 	SetRootComponent(CollisionMesh);
 	CollisionMesh->SetNotifyRigidBodyCollision(true);
 
-	LaunchBlast = CreateDefaultSubobject<UNiagaraComponent>(FName("LaunchBlast"));
-	LaunchBlast->AttachTo(CollisionMesh);
+// 	LaunchBlast = CreateDefaultSubobject<UNiagaraComponent>(FName("LaunchBlast"));
+// 	LaunchBlast->AttachTo(CollisionMesh);
 
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("ProjectileMovementComponent"));
