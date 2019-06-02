@@ -7,8 +7,8 @@
 #include "Projectile.generated.h"
 
 class UProjectileMovementComponent;
+class UNiagaraComponent;
 class UStaticMeshComponent;
-class UParticleSystemComponent;
 
 UCLASS()
 class BATTLETANK_API AProjectile : public AActor
@@ -28,12 +28,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* CollisionMesh;
 private:
 	UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* CollisionMesh = nullptr;
+	UNiagaraComponent* Blast = nullptr;
 
-	UPROPERTY(VisibleAnywhere)
-	UParticleSystemComponent* LaunchBlast = nullptr;
 };
