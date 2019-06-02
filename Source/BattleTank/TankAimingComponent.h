@@ -63,6 +63,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 10000;
 
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	int32 AmmoCount = 3;
 
 	double LastFireTime = 0.f;

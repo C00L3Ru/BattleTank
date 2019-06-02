@@ -19,6 +19,9 @@ AProjectile::AProjectile()
 	CollisionMesh->SetNotifyRigidBodyCollision(true);
 
 	Blast = CreateDefaultSubobject<UNiagaraComponent>(FName("Blast"));
+	ImpactBlast = CreateDefaultSubobject<UNiagaraComponent>(FName("ImpactBlast"));
+	ImpactBlast->bAutoActivate = false;
+
 }
 
 // Called when the game starts or when spawned

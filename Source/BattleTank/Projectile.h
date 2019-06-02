@@ -36,4 +36,7 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UNiagaraComponent* Blast = nullptr;
 
+	UPROPERTY(VisibleAnywhere)
+	UNiagaraComponent* ImpactBlast = nullptr;
+
 };
