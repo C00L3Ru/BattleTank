@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include <GameFramework/ProjectileMovementComponent.h>
 #include <../Plugins/FX/Niagara/Source/Niagara/Public/NiagaraComponent.h>
+#include <PhysicsEngine/RadialForceComponent.h>
 
 
 // Sets default values
@@ -19,8 +20,16 @@ AProjectile::AProjectile()
 	CollisionMesh->SetNotifyRigidBodyCollision(true);
 
 	Blast = CreateDefaultSubobject<UNiagaraComponent>(FName("Blast"));
+	Blast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
+
 	ImpactBlast = CreateDefaultSubobject<UNiagaraComponent>(FName("ImpactBlast"));
+	ImpactBlast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
 	ImpactBlast->bAutoActivate = false;
+
+	ExplosiveForce = CreateDefaultSubobject<URadialForceComponent>(FName("ExplosiveForce"));
+	ExplosiveForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 }
 
@@ -28,7 +37,7 @@ AProjectile::AProjectile()
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CollisionMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 }
 
 // Called every frame
@@ -36,6 +45,13 @@ void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+
+void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
+{
+	ExplosiveForce->FireImpulse();
+	ImpactBlast->Activate();
 }
 
 void AProjectile::LaunchProjectile(float LaunchSpeed)
