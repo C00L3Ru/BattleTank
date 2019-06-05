@@ -15,4 +15,16 @@ class BATTLETANK_API ATank : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ATank();
+
+	float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+private:
+	
+	class AProjectile* Projectile = nullptr;
+
+	UPROPERTY(EditDefaultsOnly)
+	int32 StartingHealth = 200.0f;
+
+	UPROPERTY(VisibleAnywhere)
+	int32 CurrentHealth = StartingHealth;
+
 };

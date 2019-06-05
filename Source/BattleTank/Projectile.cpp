@@ -5,6 +5,8 @@
 #include <GameFramework/ProjectileMovementComponent.h>
 #include <../Plugins/FX/Niagara/Source/Niagara/Public/NiagaraComponent.h>
 #include <PhysicsEngine/RadialForceComponent.h>
+#include <Kismet/GameplayStatics.h>
+#include <GameFramework/DamageType.h>
 
 
 // Sets default values
@@ -30,7 +32,6 @@ AProjectile::AProjectile()
 
 	ExplosiveForce = CreateDefaultSubobject<URadialForceComponent>(FName("ExplosiveForce"));
 	ExplosiveForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-
 }
 
 // Called when the game starts or when spawned
@@ -44,14 +45,33 @@ void AProjectile::BeginPlay()
 void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
 {
 	ExplosiveForce->FireImpulse();
-	ImpactBlast->Activate();
+	
+	SetRootComponent(Blast);
+	CollisionMesh->DestroyComponent(true);
+
+	UGameplayStatics::ApplyRadialDamage(
+		this,
+		ProjectileDamage,
+		GetActorLocation(),
+		ExplosiveForce->Radius,
+		UDamageType::StaticClass(),
+		TArray<AActor*>()
+		);
+
+	FTimerHandle Timer;
+	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::TimerExpired, DestroyDelay);
+}
+
+
+void AProjectile::TimerExpired()
+{
+	this->Destroy(true);
 }
 
 void AProjectile::LaunchProjectile(float LaunchSpeed)

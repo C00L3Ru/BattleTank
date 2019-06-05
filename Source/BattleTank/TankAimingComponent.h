@@ -64,7 +64,7 @@ private:
 	float LaunchSpeed = 10000;
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
-	int32 AmmoCount = 3;
+	int32 AmmoCount = 20;
 
 	double LastFireTime = 0.f;
 	FVector AimiDirection;

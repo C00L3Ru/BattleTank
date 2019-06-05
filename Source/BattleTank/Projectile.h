@@ -10,6 +10,7 @@ class UProjectileMovementComponent;
 class UNiagaraComponent;
 class UStaticMeshComponent;
 class URadialForceComponent;
+class UNiagaraSystem;
 
 UCLASS()
 class BATTLETANK_API AProjectile : public AActor
@@ -31,19 +32,30 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* CollisionMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UNiagaraComponent* Blast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UNiagaraComponent* ImpactBlast = nullptr;
+
+	UPROPERTY(BlueprintReadWrite)
+	UNiagaraSystem* BlastSystem = nullptr;
+
+	UPROPERTY(EditDefaultsOnly)
+	float ProjectileDamage = 50.0f;
+
 private:
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 
-	UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
-
-	UPROPERTY(VisibleAnywhere)
-	UNiagaraComponent* Blast = nullptr;
-
-	UPROPERTY(VisibleAnywhere)
-	UNiagaraComponent* ImpactBlast = nullptr;
+	void TimerExpired();
 
 	UPROPERTY(VisibleAnywhere)
 	URadialForceComponent* ExplosiveForce = nullptr;
 
+	UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
+
+	UPROPERTY(EditDefaultsOnly)
+	float DestroyDelay = 3.0f;
 };
