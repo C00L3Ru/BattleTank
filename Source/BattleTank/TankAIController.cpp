@@ -8,14 +8,14 @@ void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 	TankAimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+	AiControlledTank = GetPawn();
 }
 
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
-	auto AiControlledTank = GetPawn();
 
 	if (!ensure(PlayerTank && AiControlledTank)) { return; }
  	
@@ -43,6 +43,7 @@ void ATankAIController::SetPawn(APawn* InPawn)
 
 void ATankAIController::OnPossedTankDeath()
 {
-	
+	AiControlledTank->DetachFromControllerPendingDestroy();
 	UE_LOG(LogTemp, Warning, TEXT("I'm Fucked"));
+
 }

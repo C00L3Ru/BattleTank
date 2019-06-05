@@ -3,6 +3,20 @@
 #include "TankPlayerController.h"
 #include "Engine/World.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
+
+
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPlayerDeath);
+	}
+}
 
 void ATankPlayerController::BeginPlay()
 {
@@ -21,6 +35,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 // Move the turret towards the cross hair
 void ATankPlayerController::AimTowardsCrossHair()
 {
+	if (!GetPawn()) { return; }
 	TankAimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(TankAimingComponent)) { return; }
 	
@@ -74,6 +89,15 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 	 HitLocation = FVector(0.0f);
 	 return false;
 }
+
+
+void ATankPlayerController::OnPlayerDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Player is fucked"));
+	if(!ensure(GetPawn())) { return; }
+	StartSpectatingOnly();
+}
+
 
 // De-Project the screen position of the cross hair to a world direction
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
