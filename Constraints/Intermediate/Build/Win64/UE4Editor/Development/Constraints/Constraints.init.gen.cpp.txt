@@ -1,0 +1,3 @@
+C:\Users\jthor\Documents\Unreal Projects\Repos\BattleTank\Constraints\Intermediate\Build\Win64\UE4Editor\Development\Constraints\Definitions.Constraints.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h

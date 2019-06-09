@@ -1,0 +1,16 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-Constraints.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\jthor\Documents\Unreal Projects\Repos\BattleTank\Constraints\Intermediate\Build\Win64\ConstraintsEditor\Development\Engine\SharedPCH.Engine.h.obj"
+"C:\Users\jthor\Documents\Unreal Projects\Repos\BattleTank\Constraints\Intermediate\Build\Win64\UE4Editor\Development\Constraints\Constraints.cpp.obj"
+"C:\Users\jthor\Documents\Unreal Projects\Repos\BattleTank\Constraints\Intermediate\Build\Win64\UE4Editor\Development\Constraints\ConstraintsGameModeBase.cpp.obj"
+"C:\Users\jthor\Documents\Unreal Projects\Repos\BattleTank\Constraints\Intermediate\Build\Win64\UE4Editor\Development\Constraints\Constraints.init.gen.cpp.obj"
+"C:\Users\jthor\Documents\Unreal Projects\Repos\BattleTank\Constraints\Intermediate\Build\Win64\UE4Editor\Development\Constraints\ConstraintsGameModeBase.gen.cpp.obj"
+"C:\Users\jthor\Documents\Unreal Projects\Repos\BattleTank\Constraints\Intermediate\Build\Win64\UE4Editor\Development\Constraints\Default.rc2.res"
+/OUT:"C:\Users\jthor\Documents\Unreal Projects\Repos\BattleTank\Constraints\Intermediate\Build\Win64\UE4Editor\Development\Constraints\UE4Editor-Constraints.lib"
+/INCLUDE:IMPLEMENT_MODULE_Constraints

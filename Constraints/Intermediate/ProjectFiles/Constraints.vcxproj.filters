@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\Constraints.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{7DD7AEBA-AA7B-41EF-A05B-8D7EC1328085}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\Constraints.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\ConstraintsEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{0C71F355-F4F2-41DA-B6D8-EB61201D8E3C}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\Constraints">
+      <UniqueIdentifier>{4DD3E2A7-137F-4A14-AB87-BECB8EB82C31}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\Constraints\Constraints.Build.cs">
+      <Filter>Source\Constraints</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\Constraints\Constraints.cpp">
+      <Filter>Source\Constraints</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Constraints\Constraints.h">
+      <Filter>Source\Constraints</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Constraints\ConstraintsGameModeBase.cpp">
+      <Filter>Source\Constraints</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Constraints\ConstraintsGameModeBase.h">
+      <Filter>Source\Constraints</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

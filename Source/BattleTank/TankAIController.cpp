@@ -16,7 +16,6 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-
 	if (!ensure(PlayerTank && AiControlledTank)) { return; }
  	
 	MoveToActor(PlayerTank, AcceptanceRadius);
@@ -37,13 +36,10 @@ void ATankAIController::SetPawn(APawn* InPawn)
 		
 		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossedTankDeath);
 	}
-	
-
 }
 
 void ATankAIController::OnPossedTankDeath()
 {
 	AiControlledTank->DetachFromControllerPendingDestroy();
 	UE_LOG(LogTemp, Warning, TEXT("I'm Fucked"));
-
 }
